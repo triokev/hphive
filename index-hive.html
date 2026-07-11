@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HypeHive | Serverless Turnkey Omnichannel Brand Engagement Suite</title>
+    <!-- Google Fonts: Sintony & Inter Fallback -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Sintony:wght@400;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Sintony:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --bg-nav: #181818;
+            --accent: #84cc16; /* Vibrant Lime/Toxic Green from app layout */
+            --accent-hover: #a6e22e;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: #2e2e2e;
+            --purple-badge: #5b3fa1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Sintony', Inter, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .font-heading {
+            font-family: 'Sintony', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* Container Alignment */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: var(--bg-nav);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-box {
+            width: 36px;
+            height: 36px;
+            background-color: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-dark);
+        }
+
+        .logo-text {
+            font-size: 20px;
+            color: var(--text-main);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--accent);
+            color: var(--bg-dark);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-family: 'Sintony', sans-serif;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(132, 204, 22, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--accent);
+            border-color: var(--accent);
+            box-shadow: none;
+        }
+
+        /* Hero Section */
+        header {
+            padding: 160px 0 80px 0;
+            background: linear-gradient(180deg, rgba(24,24,24,1) 0%, rgba(18,18,18,1) 100%);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .hero-tagline {
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .hero-title {
+            font-size: 42px;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        /* Video Showcase Wrapper */
+        .video-wrapper {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            aspect-ratio: 16/9;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        .video-placeholder-icon {
+            font-size: 48px;
+            color: var(--accent);
+            margin-bottom: 12px;
+            opacity: 0.8;
+        }
+
+        /* Metric Highlights Ribbon */
+        .metrics-ribbon {
+            background-color: var(--bg-nav);
+            border-y: 1px solid var(--border-color);
+            padding: 32px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            text-align: center;
+        }
+
+        .metric-num {
+            font-size: 32px;
+            color: var(--accent);
+            font-weight: 700;
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Technical Architecture Section */
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px auto;
+        }
+
+        .section-header h2 {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+        }
+
+        .arch-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .arch-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 32px;
+            border-radius: 12px;
+            transition: border 0.3s ease;
+        }
+
+        .arch-card:hover {
+            border-color: var(--accent);
+        }
+
+        .arch-icon {
+            font-size: 28px;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .arch-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .arch-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* Showcase App Feature Matrix (Grid + Screenshots) */
+        .showcase-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+            margin-bottom: 100px;
+        }
+
+        .showcase-row:nth-child(even) {
+            direction: rtl;
+        }
+
+        .showcase-row:nth-child(even) .showcase-text {
+            direction: ltr;
+        }
+
+        .showcase-text h3 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .showcase-text p {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            font-size: 16px;
+        }
+
+        .feature-bullet-list {
+            list-style: none;
+        }
+
+        .feature-bullet-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 15px;
+        }
+
+        .feature-bullet-list i {
+            color: var(--accent);
+            margin-top: 4px;
+        }
+
+        /* App Layout Device Frame Mock */
+        .device-mock-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .app-screenshot-frame {
+            background-color: #000;
+            border: 8px solid var(--border-color);
+            border-radius: 32px;
+            width: 290px;
+            height: 580px;
+            overflow-y: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .placeholder-img-text {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .placeholder-img-text i {
+            font-size: 32px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        /* Monetization CTA Block */
+        .cta-banner {
+            background: linear-gradient(135deg, #1e1e1e 0%, #151515 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(132,204,22,0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .cta-banner h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .cta-banner p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 32px auto;
+            font-size: 18px;
+        }
+
+        /* Footer Details */
+        footer {
+            background-color: var(--bg-nav);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .footer-lock-notice {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 968px) {
+            .hero-grid, .showcase-row {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .showcase-row:nth-child(even) {
+                direction: ltr;
+            }
+            .arch-grid {
+                grid-template-columns: 1fr;
+            }
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .app-screenshot-frame {
+                width: 260px;
+                height: 520px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo-area">
+                <div class="logo-box">
+                    <i class="fa-solid fa-hive"></i>
+                </div>
+                <span class="logo-text">Hype<strong>Hive</strong></span>
+            </div>
+            <a href="#" class="btn btn-outline"><i class="fa-solid fa-lock"></i> Acquire Hub</a>
+        </div>
+    </nav>
+
+    <!-- Hero Header -->
+    <header>
+        <div class="container hero-grid">
+            <div class="hero-left">
+                <span class="hero-tagline">Acquisition Ready Asset</span>
+                <h1 class="hero-title">Serverless Mobile Suite for Omnichannel Brand Drops</h1>
+                <p class="hero-desc">An entirely self-contained, dual-role consumer engagement engine designed for instant deployment. Zero infrastructure monthly overhead ($0/mo), high perceived-value smooth native UI animations, and deep client-side admin analytics parameters.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn"><i class="fa-solid fa-file-signature"></i> Inquire via Acquire Marketplace</a>
+                </div>
+            </div>
+            <div class="hero-right">
+                <!-- Video Walkthrough Component Placeholder -->
+                <div class="video-wrapper">
+                    <i class="fa-regular fa-circle-play video-placeholder-icon"></i>
+                    <p style="font-family:'Sintony', sans-serif; font-size:14px; font-weight:700;">60-Second Video Walkthrough</p>
+                    <p style="color:var(--text-muted); font-size:12px; margin-top:4px;">Demonstrating Client Fluid Transitions & Admin Dashboard Toggle</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Metrics Ribbon -->
+    <section class="metrics-ribbon">
+        <div class="container metrics-grid">
+            <div>
+                <span class="metric-num">&lt; 48 Hrs</span>
+                <span class="metric-label">Time-To-Market (TTM)</span>
+            </div>
+            <div>
+                <span class="metric-num">$0.00</span>
+                <span class="metric-label">Monthly Infrastructure Maintenance</span>
+            </div>
+            <div>
+                <span class="metric-num">100%</span>
+                <span class="metric-label">Serverless Backend Sync</span>
+            </div>
+            <div>
+                <span class="metric-num">Dual-Role</span>
+                <span class="metric-label">Client App Architecture</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Architecture Grid -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>Engineered Architectural Moats</h2>
+                <p>Designed cleanly to minimize operational risk for enterprise micro-acquirers and corporate brand managers.</p>
+            </div>
+            <div class="arch-grid">
+                <div class="arch-card">
+                    <div class="arch-icon"><i class="fa-solid fa-cloud"></i></div>
+                    <h3>Serverless Cloud Infrastructure</h3>
+                    <p>Powered entirely via global Firestore instances. Real-time multi-region asset distribution handles massive load volumes instantly without requiring dedicated server engineering maintenance loops.</p>
+                </div>
+                <div class="arch-card">
+                    <div class="arch-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>Rigid Client Security (RBAC)</h3>
+                    <p>Administrative dashboards are decoupled internally utilizing absolute Firestore Role-Based Access Control logic gates. Ensures non-authorized network configurations are rejected structurally.</p>
+                </div>
+                <div class="arch-card">
+                    <div class="arch-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <h3>High-Value Polish & Feel</h3>
+                    <p>Pre-configured with advanced visual UI/UX layout transitions and physics-based fluid motion graphs, drastically multiplying user interaction tracking retention out of the box.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core App Features Presentation Matrix -->
+    <section class="section-padding" style="background-color: rgba(255,255,255,0.01); border-top:1px solid var(--border-color);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Product Catalog & Application Layout</h2>
+                <p>A granular look at the decoupled features managing corporate engagement metrics and consumer rewards inside the app environment.</p>
+            </div>
+
+            <!-- Feature 1: Consumer Discovery Interface -->
+            <div class="showcase-row">
+                <div class="showcase-text">
+                    <h3><i class="fa-solid fa-compass"></i> Interactive Consumer Brand Feed</h3>
+                    <p>Enables users to seamlessly browse custom verified brands, tracking explicit approval scores and active campaign profiles with localized high-speed image asset rendering vectors.</p>
+                    <ul class="feature-bullet-list">
+                        <li><i class="fa-solid fa-circle-check"></i> Automated real-time approval percentage logs.</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Clean categorizations (Electronics, Beauty, Fashion).</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Single-tap follow triggers linking user data arrays directly.</li>
+                    </ul>
+                </div>
+                <div class="device-mock-container">
+                    <div class="app-screenshot-frame">
+                        <img src="brandfeed.jpg" alt="Consumer Discovery Feed" style="width: 100%; height: 100%; object-fit: cover; border-radius: 24px;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 2: In-App Admin Monetization Tiered Engine -->
+            <div class="showcase-row">
+                <div class="showcase-text">
+                    <h3><i class="fa-solid fa-credit-card"></i> Built-In SaaS Subscription Gate</h3>
+                    <p>A ready-to-monetize account tier dashboard limit structure built inside the frontend UI framework configuration logic rules.</p>
+                    <ul class="feature-bullet-list">
+                        <li><i class="fa-solid fa-circle-check"></i> Free accounts limited automatically to a single active campaign profile.</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Hard-coded Material Design premium tier custom up-sell views ($9.99/mo context layouts).</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Unlocks regional maps, geographical claims trend arrays, and deep metrics upon validation.</li>
+                    </ul>
+                </div>
+                <div class="device-mock-container">
+                    <div class="app-screenshot-frame">
+                        <img src="subscription.jpg" alt="SaaS Subscription Gate" style="width: 100%; height: 100%; object-fit: cover; border-radius: 24px;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3: Enterprise Fulfillment Logistics -->
+            <div class="showcase-row">
+                <div class="showcase-text">
+                    <h3><i class="fa-solid fa-boxes-packing"></i> Turnkey Corporate Logistics Tools</h3>
+                    <p>Bridges the digital-to-physical tracking threshold, making the application an asset for traditional brick-and-mortar operations or e-commerce networks.</p>
+                    <ul class="feature-bullet-list">
+                        <li><i class="fa-solid fa-circle-check"></i> <strong>QR Code Verification:</strong> Secure camera checkout token matching inside the system.</li>
+                        <li><i class="fa-solid fa-circle-check"></i> <strong>Shipping Manifest Exports:</strong> One-tap clean extraction of raw database entries into clean structural fulfillment CSV logs.</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Real-time dispatch layout queue distributions.</li>
+                    </ul>
+                </div>
+                <div class="device-mock-container">
+                    <div class="app-screenshot-frame">
+                        <img src="logistics.jpg" alt="Enterprise Logistics Suite" style="width: 100%; height: 100%; object-fit: cover; border-radius: 24px;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Monetization / Valuation Call to Action Section -->
+    <section class="section-padding container">
+        <div class="cta-banner">
+            <h2>Acquisition Pricing Valuation Sweet-Spot</h2>
+            <p>Positioned strategically for fast-moving micro-funds, ad networks, or agencies seeking immediate mobile territory deployment. Fully autonomous code configuration allows custom integrations within 48 hours.</p>
+            <a href="#" class="btn"><i class="fa-solid fa-comments"></i> Initiate Private M&A Discussion</a>
+            <div class="footer-lock-notice">
+                <i class="fa-solid fa-user-shield"></i> All initial reviews handled confidentially under automated mutual NDA structures.
+            </div>
+        </div>
+    </section>
+
+    <!-- Clean Confidentiality Footer Layout -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 HypeHive Portal Platform Asset. All Rights Reserved.</p>
+            <p style="font-size: 12px; margin-top: 8px; color: #555;">Software listing hosted securely for marketplace routing optimization. Package structure documentation available to authenticated entities.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
