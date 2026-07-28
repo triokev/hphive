@@ -79,17 +79,21 @@
         .logo-box {
             width: 36px;
             height: 36px;
-            background-color: var(--accent);
-            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--bg-dark);
         }
+		
+		.logo-box img{
+			psoition: absolute;
+			width: 36px;
+            height: 36px;
+		}
 
         .logo-text {
             font-size: 20px;
-            color: var(--text-main);
+            color: var(--accent);
         }
 
         /* Buttons */
@@ -152,14 +156,14 @@
         }
 
         .hero-title {
-            font-size: 42px;
+            font-size: 30px;
             line-height: 1.2;
             margin-bottom: 24px;
         }
 
         .hero-desc {
             color: var(--text-muted);
-            font-size: 18px;
+            font-size: 16px;
             margin-bottom: 32px;
         }
 
@@ -443,7 +447,7 @@
         <div class="container nav-container">
             <div class="logo-area">
                 <div class="logo-box">
-                    <i class="fa-solid fa-hive"></i>
+                    <img src="lgos/download-4.png" />
                 </div>
                 <span class="logo-text">Hype<strong>Hive</strong></span>
             </div>
@@ -456,7 +460,7 @@
         <div class="container hero-grid">
             <div class="hero-left">
                 <span class="hero-tagline">Acquisition Ready Asset</span>
-                <h1 class="hero-title">Serverless Mobile Suite for Omnichannel Brand Drops</h1>
+                <h1 class="hero-title">Turnkey Mobile SaaS: Gamified Brand Drops & Product Discovery (with RevenueCat Monetization & QR Verification).</h1>
                 <p class="hero-desc">An entirely self-contained, dual-role consumer engagement engine designed for instant deployment. Zero infrastructure monthly overhead ($0/mo), high perceived-value smooth native UI animations, and deep client-side admin analytics parameters.</p>
                 <div class="hero-buttons">
                     <a href="#" class="btn"><i class="fa-solid fa-file-signature"></i> Inquire via Acquire Marketplace</a>
@@ -465,10 +469,8 @@
             <div class="hero-right">
                 <!-- Video Walkthrough Component Placeholder -->
                 <div class="video-wrapper">
-                    <i class="fa-regular fa-circle-play video-placeholder-icon"></i>
-                    <p style="font-family:'Sintony', sans-serif; font-size:14px; font-weight:700;">60-Second Video Walkthrough</p>
-                    <p style="color:var(--text-muted); font-size:12px; margin-top:4px;">Demonstrating Client Fluid Transitions & Admin Dashboard Toggle</p>
-                </div>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/Ip8T7Q9MHDQ?si=-VGsaxo0IftVdGgT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+				</div>
             </div>
         </div>
     </header>
