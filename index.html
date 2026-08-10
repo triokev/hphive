@@ -360,6 +360,127 @@
             border-radius: 24px;
         }
 
+        /* ==========================================================================
+           APP GALLERY STYLES
+           ========================================================================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .gallery-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gallery-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-img-wrapper {
+            background-color: #000;
+            border: 4px solid var(--border-color);
+            border-radius: 20px;
+            width: 100%;
+            aspect-ratio: 9/19;
+            overflow: hidden;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .gallery-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-card:hover .gallery-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .gallery-card h4 {
+            font-size: 16px;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .gallery-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Modal Preview Overlay */
+        .gallery-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        .gallery-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 360px;
+            width: 100%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .modal-img-frame {
+            border: 6px solid var(--border-color);
+            border-radius: 28px;
+            overflow: hidden;
+            background: #000;
+            max-height: 80vh;
+        }
+
+        .modal-img-frame img {
+            width: 100%;
+            height: auto;
+            max-height: 78vh;
+            display: block;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: var(--text-main);
+            font-size: 28px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: var(--accent);
+        }
+
         /* Monetization CTA Block */
         .cta-banner {
             background: linear-gradient(135deg, #1e1e1e 0%, #151515 100%);
@@ -522,6 +643,11 @@
             .arch-card {
                 padding: 24px;
             }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
         }
     </style>
 </head>
@@ -628,7 +754,7 @@
                 </div>
                 <div class="device-mock-container">
                     <div class="app-screenshot-frame">
-                        <img src="brandfeed.jpg" alt="Consumer Discovery Feed">
+                        <img src="photos/brands.jpg" alt="Consumer Discovery Feed">
                     </div>
                 </div>
             </div>
@@ -664,13 +790,72 @@
                 </div>
                 <div class="device-mock-container">
                     <div class="app-screenshot-frame">
-                        <img src="logistics.jpg" alt="Enterprise Logistics Suite">
+                        <img src="photos/4.jpg" alt="Enterprise Logistics Suite">
                     </div>
                 </div>
             </div>
 
         </div>
     </section>
+
+    <!-- Screenshot Gallery Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>Application Interface Gallery</h2>
+                <p>Explore the high-fidelity user interface screens designed for both consumer engagement and administrative control.</p>
+            </div>
+            <div class="gallery-grid">
+                
+                <!-- Gallery Item 1 -->
+                <div class="gallery-card" onclick="openModal('photos/2.jpg', 'Brand Feed Interface')">
+                    <div class="gallery-img-wrapper">
+                        <img src="photos/2.jpg" alt="Brand Feed Interface">
+                    </div>
+                    <h4>Brand Feed</h4>
+                    <p>Consumer Discovery</p>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="gallery-card" onclick="openModal('photos/1.jpg', 'Subscription Paywall')">
+                    <div class="gallery-img-wrapper">
+                        <img src="photos/1.jpg" alt="Subscription Paywall">
+                    </div>
+                    <h4>Paywall Engine</h4>
+                    <p>RevenueCat Tier Gate</p>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="gallery-card" onclick="openModal('photos/5.jpg', 'Logistics & QR Scanner')">
+                    <div class="gallery-img-wrapper">
+                        <img src="photos/5.jpg" alt="Logistics & QR Scanner">
+                    </div>
+                    <h4>Logistics Suite</h4>
+                    <p>QR Token Scanner</p>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="gallery-card" onclick="openModal('photos/6.jpg', 'Analytics Dashboard')">
+                    <div class="gallery-img-wrapper">
+                        <img src="photos/6.jpg" alt="Analytics Dashboard">
+                    </div>
+                    <h4>Admin Analytics</h4>
+                    <p>Client Data Logs</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Lightbox for Screen Zoom -->
+    <div class="gallery-modal" id="galleryModal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div class="modal-img-frame">
+                <img id="modalImage" src="" alt="Expanded View">
+            </div>
+        </div>
+    </div>
 
     <!-- Monetization / Valuation Call to Action Section -->
     <section class="section-padding container">
@@ -692,5 +877,26 @@
         </div>
     </footer>
 
+    <!-- Gallery Interactivity Script -->
+    <script>
+        function openModal(imageSrc, titleText) {
+            const modal = document.getElementById('galleryModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imageSrc;
+            modalImg.alt = titleText;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('galleryModal');
+            modal.classList.remove('active');
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
